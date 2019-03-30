@@ -1,0 +1,63 @@
+package network;
+
+/**
+ * @author 안희동 db레벨 전력비의 근사값 계싼
+ */
+public class DbLevel {
+
+	// Gains
+	public static void gain(double[] numArr) {
+
+		double[] gain = new double[10];
+		double getGain = 0;
+		for (int i = 0; i < gain.length; i++) {
+			getGain = (double) Math.pow(10, numArr[i] / 10);
+			double result = roundOff(getGain);
+			gain[i] = result;
+		}
+		for (int i = 0; i < gain.length; i++) {
+			System.out.println("[" + (i + 1) + "] Gain : " + gain[i]);
+		}
+
+	}
+
+	// Losses
+	public static void loss(double[] numArr) {
+
+		double[] loss = new double[10];
+		double getLoss = 0;
+		for (int i = 0; i < loss.length; i++) {
+			getLoss = (double) Math.pow(10, numArr[i] / 10);
+			getLoss = 1 / getLoss;
+			double result = roundOff(getLoss);
+			loss[i] = result;
+		}
+		for (int i = 0; i < loss.length; i++) {
+			System.out.println("[" + (i + 1) + "] loss : " + loss[i]);
+		}
+
+	}
+
+	// round-off
+	public static double roundOff(double num) {
+		num = num * 1000;
+		double roundOff = Math.round(num);
+		roundOff = roundOff / 1000;
+		return roundOff;
+	}
+
+	public static void main(String[] args) {
+
+		// 1~10까지의 Decibels 생성
+		double[] numArr = new double[10];
+		for (int i = 0; i < 10; i++) {
+			numArr[i] = i + 1;
+		}
+
+		gain(numArr);
+		System.out.println();
+		loss(numArr);
+
+	}
+
+}
